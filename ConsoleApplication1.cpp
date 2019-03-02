@@ -1,5 +1,6 @@
-/*×Ô»Ø±ÜËæ»úĞĞ×ßÎÊÌâ
- *@2017301500140 ÕÅ«h
+/**
+ *self-avoiding walk
+ *@Messier42
  */
 
 #include <stdlib.h>
@@ -7,21 +8,21 @@
 #include <time.h>
 #define M 100
 
-bool findPath(int &leng,int N)//Ñ°ÕÒÂ·¾¶ 
+bool findPath(int &leng,int N)//å¯»æ‰¾è·¯å¾„ 
 {
-	int Graph[M][M]={0};//¶¨ÒåµØÍ¼
-	int i=N/2,j=N/2;//ÆğÊ¼Î»ÖÃÔÚµØÍ¼ÖĞÑë£¬i±íÊ¾ĞĞ£¬j±íÊ¾ÁĞ 
-	while(i!=0&&i!=(N-1)&&j!=0&&j!=(N-1))//ÔÚ¹·Î´ÕÒµ½³öÌÓÂ·ÏßÊ±Ñ­»·
+	int Graph[M][M]={0};//å®šä¹‰åœ°å›¾
+	int i=N/2,j=N/2;//èµ·å§‹ä½ç½®åœ¨åœ°å›¾ä¸­å¤®ï¼Œiè¡¨ç¤ºè¡Œï¼Œjè¡¨ç¤ºåˆ— 
+	while(i!=0&&i!=(N-1)&&j!=0&&j!=(N-1))//åœ¨ç‹—æœªæ‰¾åˆ°å‡ºé€ƒè·¯çº¿æ—¶å¾ªç¯
 	{
 		Graph[i][j]=1;
-		if(Graph[i][j-1]==1&&Graph[i][j+1]==1&&Graph[i-1][j]==1&&Graph[i+1][j]==1)//ÏİÈëËÀºúÍ¬ 
+		if(Graph[i][j-1]==1&&Graph[i][j+1]==1&&Graph[i-1][j]==1&&Graph[i+1][j]==1)//é™·å…¥æ­»èƒ¡åŒ 
 			return false; 
 		else
 		{
 			int r; 
-			while(Graph[i][j]==1)//È·±£²»»á×ßµ½ÖØ¸´Â·¿Ú 
+			while(Graph[i][j]==1)//ç¡®ä¿ä¸ä¼šèµ°åˆ°é‡å¤è·¯å£ 
 			{
-				r=rand()%4;//Éú³É·½Ïò
+				r=rand()%4;//ç”Ÿæˆæ–¹å‘
 				switch(r)
 				{
 					case 0:
@@ -47,35 +48,35 @@ bool findPath(int &leng,int N)//Ñ°ÕÒÂ·¾¶
 	return true; 
 }
 
-int main()//Ö÷º¯Êı 
+int main()//ä¸»å‡½æ•° 
 {
-	int N;//ÎÊÌâ¹æÄ£ 
-	int All;//×Ü´ÎÊı
-	int Suc=0;//³É¹¦´ÎÊı
-	int Fail=0;//Ê§°Ü´ÎÊı 
-	float aveLengSuc=0.0;//³É¹¦Â·¾¶Æ½¾ù³¤¶È 
-	float aveLengFail=0.0;//Ê§°ÜÂ·¾¶Æ½¾ù³¤¶È 
-	printf("×Ô»Ø±ÜĞĞ×ßÎÊÌâ\n");
-	printf("\nÇëÊäÈëÎÊÌâ¹æÄ£(3~100)£º");
+	int N;//é—®é¢˜è§„æ¨¡ 
+	int All;//æ€»æ¬¡æ•°
+	int Suc=0;//æˆåŠŸæ¬¡æ•°
+	int Fail=0;//å¤±è´¥æ¬¡æ•° 
+	float aveLengSuc=0.0;//æˆåŠŸè·¯å¾„å¹³å‡é•¿åº¦ 
+	float aveLengFail=0.0;//å¤±è´¥è·¯å¾„å¹³å‡é•¿åº¦ 
+	printf("è‡ªå›é¿è¡Œèµ°é—®é¢˜\n");
+	printf("\nè¯·è¾“å…¥é—®é¢˜è§„æ¨¡(3~100)ï¼š");
 	scanf("%d",&N); 
-	printf("\nÇëÊäÈëÊÔÑé´ÎÊı£º");
+	printf("\nè¯·è¾“å…¥è¯•éªŒæ¬¡æ•°ï¼š");
 	scanf("%d",&All);
 	for(int i=0;i<All;i++)
 	{	
 		int Leng=0;
 		if(findPath(Leng,N))
-			aveLengSuc=(Suc*aveLengSuc+Leng)/(++Suc);//¼ÆËãÆ½¾ù³É¹¦Â·¾¶µÄÆ½¾ù³¤¶ÈºÍ³É¹¦´ÎÊı 
+			aveLengSuc=(Suc*aveLengSuc+Leng)/(++Suc);//è®¡ç®—å¹³å‡æˆåŠŸè·¯å¾„çš„å¹³å‡é•¿åº¦å’ŒæˆåŠŸæ¬¡æ•° 
 		else
-			aveLengFail=(Fail*aveLengFail+Leng)/(++Fail);//¼ÆËãÆ½¾ùÊ§°ÜÂ·¾¶µÄÆ½¾ù³¤¶ÈºÍÊ§°Ü´ÎÊı 
+			aveLengFail=(Fail*aveLengFail+Leng)/(++Fail);//è®¡ç®—å¹³å‡å¤±è´¥è·¯å¾„çš„å¹³å‡é•¿åº¦å’Œå¤±è´¥æ¬¡æ•° 
 	}
-	printf("\n×ÜÑ°ÕÒ´ÎÊıÎª%d",All);
-	printf("\nÆ½¾ùÂ·¾¶³¤¶ÈÎª%0.2f\n",(aveLengSuc*Suc+aveLengFail*Fail)/All);
-	printf("\n³É¹¦³öÌÓ´ÎÊıÎª%d",Suc);
-	printf("\n³É¹¦¸ÅÂÊÎª%0.2f%%",Suc*100.0/All);
-	printf("\n³É¹¦Â·¾¶Æ½¾ù³¤¶ÈÎª%0.2f\n",aveLengSuc);
-	printf("\nÊ§°Ü³öÌÓ´ÎÊıÎª%d",Fail);
-	printf("\nÊ§°Ü¸ÅÂÊÎª%0.2f%%",Fail*100.0/All);
-	printf("\nÊ§°ÜÂ·¾¶Æ½¾ù³¤¶ÈÎª%0.2f\n\n",aveLengFail);
+	printf("\næ€»å¯»æ‰¾æ¬¡æ•°ä¸º%d",All);
+	printf("\nå¹³å‡è·¯å¾„é•¿åº¦ä¸º%0.2f\n",(aveLengSuc*Suc+aveLengFail*Fail)/All);
+	printf("\næˆåŠŸå‡ºé€ƒæ¬¡æ•°ä¸º%d",Suc);
+	printf("\næˆåŠŸæ¦‚ç‡ä¸º%0.2f%%",Suc*100.0/All);
+	printf("\næˆåŠŸè·¯å¾„å¹³å‡é•¿åº¦ä¸º%0.2f\n",aveLengSuc);
+	printf("\nå¤±è´¥å‡ºé€ƒæ¬¡æ•°ä¸º%d",Fail);
+	printf("\nå¤±è´¥æ¦‚ç‡ä¸º%0.2f%%",Fail*100.0/All);
+	printf("\nå¤±è´¥è·¯å¾„å¹³å‡é•¿åº¦ä¸º%0.2f\n\n",aveLengFail);
 	system("PAUSE");
 	return 0;
 }
